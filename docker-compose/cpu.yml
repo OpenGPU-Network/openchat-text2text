@@ -10,7 +10,7 @@ services:
 
   openchat-t2t-service:
     image: opengpunetwork/openchat-text2text:latest@sha256:daf5714a1f8f2b9031d9ed62ffb4cd3763e5ff2bf1063cb58f7b5d90362e4c5e
-    pull_policy: never
+    pull_policy: always
     ports:
       - "${PORT}:5555"
     extra_hosts:
