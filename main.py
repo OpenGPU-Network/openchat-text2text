@@ -1,12 +1,10 @@
-from typing import List
-from pydantic import BaseModel
-
 import ollama
 from ollama import chat
 from ollama import ChatResponse
 
 import ogpu.service
 
+from .models import InputData, Message
 
 MODEL_NAME = "qwen2.5:3b"
 
@@ -15,14 +13,6 @@ def setup():
     ogpu.service.logger.info(f"Pulling {MODEL_NAME} model...")
     ollama.pull(MODEL_NAME)
     ogpu.service.logger.info(f"{MODEL_NAME} pulled.")
-
-
-class Message(BaseModel):
-    role: str = "user"
-    content: str = "what is the capital of France?"
-
-class InputData(BaseModel):
-    messages: List[Message]
 
 
 @ogpu.service.expose()
