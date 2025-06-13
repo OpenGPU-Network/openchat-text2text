@@ -1,7 +1,9 @@
 services:
 
   openchat-ollama-service:
-    image: ollama/ollama:latest@sha256:4a559b2dd3ef125d83f0b65f3f48d4795569c47d9ddbc3de36b3c1532da194d8
+    image: ollama/ollama:latest
+    ports:
+      - "12436:11434"
     pull_policy: always
     volumes:
       - ollama_models:/root/.ollama
@@ -24,7 +26,7 @@ services:
       - "host.docker.internal:host-gateway"
     environment:
       - CALLBACK_URL=${CALLBACK_URL}
-      - OLLAMA_HOST=http://openchat-ollama-service:11434
+      - OLLAMA_HOST=http://host.docker.internal:12436
     depends_on:
       - openchat-ollama-service
     networks:
